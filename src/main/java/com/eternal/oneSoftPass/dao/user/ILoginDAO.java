@@ -1,4 +1,4 @@
-package com.eternal.oneSoftPass.dao.login;
+package com.eternal.oneSoftPass.dao.user;
 
 import com.eternal.oneSoftPass.bean.UserBean;
 import org.apache.ibatis.annotations.Mapper;
