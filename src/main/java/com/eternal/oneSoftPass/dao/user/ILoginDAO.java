@@ -12,4 +12,7 @@ public interface ILoginDAO {
 
     @Select("select * from osp_user where tel = #{tel} and password = #{pwd}")
     UserBean getUserByLogin(@Param("tel") String tel,@Param("pwd") String password);
+
+    @Select("select * from osp_user where U_ID = #{id} and password = #{pwd}")
+    UserBean getUserByCookie(@Param("id") String id,@Param("pwd") String password);
 }

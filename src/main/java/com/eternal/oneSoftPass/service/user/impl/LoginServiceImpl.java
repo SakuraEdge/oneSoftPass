@@ -25,9 +25,9 @@ public class LoginServiceImpl implements ILoginService {
 
     @Override
     public UserBean getUserByCookie(Map<String, String> param) {
-        String tel = param.get("tel");
+        String id = param.get("id");
         String pwd = param.get("password");
-        return loginDAO.getUserByLogin(tel,pwd);
+        return loginDAO.getUserByCookie(id,pwd);
     }
 
 }
