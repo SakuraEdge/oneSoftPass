@@ -9,8 +9,8 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface IRegisterDAO {
 
-    @Insert("insert into osp_user(NAME,TEL,PASSWORD,EMAIL) values(#{name},#{tel},#{pwd},#{email});")
-    void registerUser(@Param("name") String name,@Param("tel") String tel,@Param("pwd") String pwd,@Param("email") String email);
+    @Insert("insert into osp_user(NAME,TEL,PASSWORD,EMAIL,CREATE_TIME) values(#{name},#{tel},#{pwd},#{email},#{time});")
+    void registerUser(@Param("name") String name,@Param("tel") String tel,@Param("pwd") String pwd,@Param("email") String email,@Param("time") String time);
 
 
 }

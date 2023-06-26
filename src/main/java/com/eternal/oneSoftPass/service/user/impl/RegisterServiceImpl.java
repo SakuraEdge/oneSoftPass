@@ -8,6 +8,8 @@ import com.eternal.oneSoftPass.utils.MD5Utils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Map;
 
 @Service
@@ -32,6 +34,10 @@ public class RegisterServiceImpl implements IRegisterService {
         String is_tel = userDAO.selectUIDByTEL(tel);
         String is_email = userDAO.selectUIDByEmail(email);
 
+        Date date = new Date();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        String time = dateFormat.format(date);
+
         if (is_tel != null){
             resp.setCode(301);
         }
@@ -39,7 +45,7 @@ public class RegisterServiceImpl implements IRegisterService {
             resp.setCode(302);
         }
         else {
-            registerDAO.registerUser(name,tel,pwd,email);
+            registerDAO.registerUser(name,tel,pwd,email,time);
             resp.setCode(200);
             resp.setMsg("注册成功");
         }

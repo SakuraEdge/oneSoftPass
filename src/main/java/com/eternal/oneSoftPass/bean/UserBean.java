@@ -8,6 +8,8 @@ public class UserBean {
     private String PASSWORD;
     private String DESCRIPTION;
 
+    private String LOGIN_TIME;
+
     private String CREATE_TIME;
 
     public String getU_ID() {
@@ -64,5 +66,13 @@ public class UserBean {
 
     public void setCREATE_TIME(String CREATE_TIME) {
         this.CREATE_TIME = CREATE_TIME;
+    }
+
+    public String getLOGIN_TIME() {
+        return LOGIN_TIME;
+    }
+
+    public void setLOGIN_TIME(String LOGIN_TIME) {
+        this.LOGIN_TIME = LOGIN_TIME;
     }
 }

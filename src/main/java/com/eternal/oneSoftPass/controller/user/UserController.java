@@ -22,4 +22,15 @@ public class UserController {
         DataIsNull<UserBean> isNull = new DataIsNull<>();
         return isNull.noIsNull(userService.getUserInfo(param));
     }
+
+    @PostMapping("/updateDes")
+    public void updateDes(@RequestBody Map<String,String> param){
+        userService.updateDes(param);
+    }
+
+    @PostMapping("updatePwd")
+    public CommonResp<String> updatePwd(@RequestBody Map<String,String> param){
+        return userService.updatePwd(param);
+    }
+
 }
