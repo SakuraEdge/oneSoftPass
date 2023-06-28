@@ -1,5 +1,6 @@
 package com.eternal.oneSoftPass.service.user.impl;
 
+import com.eternal.oneSoftPass.bean.SignInfoBean;
 import com.eternal.oneSoftPass.bean.UserBean;
 import com.eternal.oneSoftPass.dao.user.ILoginDAO;
 import com.eternal.oneSoftPass.dao.user.IUserDAO;
@@ -9,6 +10,7 @@ import com.eternal.oneSoftPass.utils.MD5Utils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Map;
 
 @Service
@@ -53,5 +55,10 @@ public class UserServiceImpl implements IUserService {
         }
 
         return resp;
+    }
+
+    @Override
+    public List<SignInfoBean> getSignInfo() {
+        return userDAO.getSignInfo();
     }
 }

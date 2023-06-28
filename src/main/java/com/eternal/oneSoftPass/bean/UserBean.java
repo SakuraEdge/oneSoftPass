@@ -10,6 +10,8 @@ public class UserBean {
 
     private String LOGIN_TIME;
 
+    private String exp;
+
     private String CREATE_TIME;
 
     public String getU_ID() {
@@ -74,5 +76,13 @@ public class UserBean {
 
     public void setLOGIN_TIME(String LOGIN_TIME) {
         this.LOGIN_TIME = LOGIN_TIME;
+    }
+
+    public String getExp() {
+        return exp;
+    }
+
+    public void setExp(String exp) {
+        this.exp = exp;
     }
 }

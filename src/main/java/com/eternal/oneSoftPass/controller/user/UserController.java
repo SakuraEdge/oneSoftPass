@@ -1,5 +1,6 @@
 package com.eternal.oneSoftPass.controller.user;
 
+import com.eternal.oneSoftPass.bean.SignInfoBean;
 import com.eternal.oneSoftPass.bean.UserBean;
 import com.eternal.oneSoftPass.service.user.IUserService;
 import com.eternal.oneSoftPass.utils.CommonResp;
@@ -9,6 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -28,9 +30,15 @@ public class UserController {
         userService.updateDes(param);
     }
 
-    @PostMapping("updatePwd")
+    @PostMapping("/updatePwd")
     public CommonResp<String> updatePwd(@RequestBody Map<String,String> param){
         return userService.updatePwd(param);
+    }
+
+    @PostMapping("/getSignInfo")
+    public CommonResp<List<SignInfoBean>> getSignInfo(){
+        DataIsNull<SignInfoBean> isNull = new DataIsNull<>();
+        return isNull.listIsNull(userService.getSignInfo());
     }
 
 }
