@@ -16,10 +16,20 @@ public class UnicodeServiceImpl implements IUnicodeService {
         String kanji = param.get("kanji");
         StringBuilder unicode = new StringBuilder();
         for (int i = 0; i < kanji.length(); i++) {
+            // 取出每一个字符
             char c = kanji.charAt(i);
-            unicode.append("\\u").append(Integer.toHexString((int) c));
+            // 转换为unicode
+            String tmp = Integer.toHexString(c);
+            if (tmp.length() >= 4) {
+                unicode.append("\\u").append(Integer.toHexString(c));
+            } else if (tmp.length() == 3){
+                unicode.append("\\u0").append(Integer.toHexString(c));
+            } else if (tmp.length() == 2){
+                unicode.append("\\u00").append(Integer.toHexString(c));
+            } else {
+                unicode.append("\\u000").append(Integer.toHexString(c));
+            }
         }
-        System.out.println(unicode);
         return unicode.toString();
     }
 
@@ -33,7 +43,6 @@ public class UnicodeServiceImpl implements IUnicodeService {
             ch = (char) Integer.parseInt(matcher.group(2), 16);
             unicode = unicode.replace(matcher.group(1), ch + "");
         }
-        System.out.println(unicode);
         return unicode;
     }
 }
