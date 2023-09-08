@@ -4,11 +4,13 @@ import cn.hutool.http.HttpRequest;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import com.eternal.oneSoftPass.bean.RetBean;
 import com.eternal.oneSoftPass.dao.exchange.IExChangeDAO;
 import com.eternal.oneSoftPass.service.exchange.IExChangeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.Map;
 
 @Service
@@ -43,5 +45,10 @@ public class ExchangeServiceImpl implements IExChangeService {
             exChangeDAO.UpdateExChange(i,name,hui_in,hui_out,chao_in,chao_out,code,zhesuan,day,time);
         }
         System.out.println("更新汇率成功");
+    }
+
+    @Override
+    public ArrayList<RetBean> getRetInfo() {
+        return exChangeDAO.getRetInfo();
     }
 }
