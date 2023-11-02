@@ -11,12 +11,12 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface ILoginDAO {
 
-    @Select("select * from osp_user where tel = #{tel} and password = #{pwd}")
+    @Select("select * from osp_user where tel = #{tel} and password = #{pwd} and STATE = 'U")
     UserBean getUserByLogin(@Param("tel") String tel,@Param("pwd") String password);
 
-    @Select("select * from osp_user where U_ID = #{id} and password = #{pwd}")
+    @Select("select * from osp_user where U_ID = #{id} and password = #{pwd} and STATE = 'U'")
     UserBean getUserByCookie(@Param("id") String id,@Param("pwd") String password);
 
-    @Update("update osp_user set LOGIN_TIME = #{time} where U_ID = #{id}")
+    @Update("update osp_user set LOGIN_TIME = #{time} where U_ID = #{id} and STATE = 'U'")
     void updateLoginTime(@Param("id") String id,@Param("time") String time);
 }

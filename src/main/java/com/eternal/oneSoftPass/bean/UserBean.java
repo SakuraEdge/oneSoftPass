@@ -13,6 +13,8 @@ public class UserBean {
     private String exp;
 
     private String CREATE_TIME;
+    
+    private String STATE;
 
     public String getU_ID() {
         return U_ID;
@@ -84,5 +86,13 @@ public class UserBean {
 
     public void setExp(String exp) {
         this.exp = exp;
+    }
+
+    public String getSTATE() {
+        return STATE;
+    }
+
+    public void setSTATE(String STATE) {
+        this.STATE = STATE;
     }
 }
