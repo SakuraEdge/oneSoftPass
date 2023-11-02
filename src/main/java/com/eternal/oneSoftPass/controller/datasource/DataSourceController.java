@@ -1,5 +1,6 @@
 package com.eternal.oneSoftPass.controller.datasource;
 
+import com.eternal.oneSoftPass.bean.DataSourceBean;
 import com.eternal.oneSoftPass.service.datasource.IDataSourceService;
 import com.eternal.oneSoftPass.service.datasource.impl.DataSourceServiceImpl;
 import com.eternal.oneSoftPass.utils.CommonResp;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.sql.SQLException;
+import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -23,14 +25,41 @@ public class DataSourceController {
         String userName = param.get("userName");
         String userPwd = param.get("userPwd");
         String isConn = dataSourceService.testConn(url,userName,userPwd);
+        return getStringCommonResp(isConn);
+    }
+
+    @PostMapping("/sourceSave")
+    public CommonResp<String> sourceSave(@RequestBody Map<String,String> param) {
+        String isSave = dataSourceService.sourceSave(param);
+        return getStringCommonResp(isSave);
+    }
+
+
+    @PostMapping("/getSource")
+    public CommonResp<List<DataSourceBean>> getSource(@RequestBody Map<String,String> param) {
+        CommonResp<List<DataSourceBean>> comm = new CommonResp<>();
+        DataIsNull<DataSourceBean> isNull = new DataIsNull<>();
+        String id = param.get("id");
+        List<DataSourceBean> bean = dataSourceService.getSource(id);
+        return isNull.listIsNull(bean);
+    }
+
+    @PostMapping("/delSource")
+    public CommonResp<String> delSource(@RequestBody Map<String,List<String>> param){
+        List<String> list = param.get("sourceList");
+        String isDel = dataSourceService.delSource(list);
+        return getStringCommonResp(isDel);
+    }
+
+    private CommonResp<String> getStringCommonResp(String isSave) {
         CommonResp<String> comm = new CommonResp<>();
-        if ("true".equals(isConn)) {
+        if ("true".equals(isSave)) {
             comm.setCode(200);
-            comm.setResult(isConn);
+            comm.setResult(isSave);
         }
         else {
             comm.setCode(300);
-            comm.setResult(isConn);
+            comm.setResult(isSave);
         }
         return comm;
     }

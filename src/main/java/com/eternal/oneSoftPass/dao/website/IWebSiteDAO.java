@@ -10,6 +10,6 @@ import java.util.List;
 @Mapper
 @Repository
 public interface IWebSiteDAO {
-    @Select("select * from website_info;")
+    @Select("select * from website_info where IS_OPEN = 1;")
     List<WebSiteBean> getWebSite();
 }
