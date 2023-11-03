@@ -1,5 +1,7 @@
 package com.eternal.oneSoftPass.dao.website;
 
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.eternal.oneSoftPass.bean.UserBean;
 import com.eternal.oneSoftPass.bean.WebSiteBean;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
@@ -9,7 +11,5 @@ import java.util.List;
 
 @Mapper
 @Repository
-public interface IWebSiteDAO {
-    @Select("select * from website_info where IS_OPEN = 1;")
-    List<WebSiteBean> getWebSite();
+public interface IWebSiteDAO extends BaseMapper<WebSiteBean> {
 }

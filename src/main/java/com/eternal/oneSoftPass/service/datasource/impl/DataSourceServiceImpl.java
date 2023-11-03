@@ -1,5 +1,6 @@
 package com.eternal.oneSoftPass.service.datasource.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.eternal.oneSoftPass.bean.DataSourceBean;
 import com.eternal.oneSoftPass.dao.datasource.IDataSourceDAO;
 import com.eternal.oneSoftPass.service.datasource.IDataSourceService;
@@ -39,22 +40,25 @@ public class DataSourceServiceImpl implements IDataSourceService {
 
     @Override
     public String sourceSave(Map<String,String> param) {
-        String name = param.get("name");
-        String uid = param.get("uid");
-        String type = param.get("type");
-        String ip = param.get("ip");
-        String port = param.get("port");
-        String table = param.get("table");
-        String userName = param.get("userName");
-        String userPwd = param.get("userPwd");
-        String note = param.get("note");
+        DataSourceBean bean = new DataSourceBean();
+        bean.setNAME(param.get("name"));
+        bean.setU_ID(param.get("uid"));
+        bean.setDATA_TYPE(param.get("type"));
+        bean.setDATA_IP(param.get("ip"));
+        bean.setDATA_PORT(param.get("port"));
+        bean.setDATA_TABLE(param.get("table"));
+        bean.setDATA_USERNAME(param.get("userName"));
+        bean.setDATA_PASSWORD(param.get("userPwd"));
+        bean.setNOTE(param.get("note"));
 
         Date date = new Date();
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         String time = dateFormat.format(date);
 
+        bean.setCREATE_TIME(time);
+
         try {
-            dataSourceDAO.sourceSave(name,uid,type,ip,port,table,userName,userPwd,time,note);
+            dataSourceDAO.insert(bean);
         }
         catch (Exception e){
             System.out.println(e.getMessage());
@@ -65,14 +69,18 @@ public class DataSourceServiceImpl implements IDataSourceService {
 
     @Override
     public List<DataSourceBean> getSource(String id) {
-        return dataSourceDAO.getSource(id);
+        QueryWrapper<DataSourceBean> wrapper = new QueryWrapper<>();
+        wrapper.eq("STATE",'U');
+        return dataSourceDAO.selectList(wrapper);
     }
 
     @Override
     public String delSource(List<String> param) {
         try {
             for (String i:param){
-                dataSourceDAO.delSource(i);
+                DataSourceBean bean = dataSourceDAO.selectById(i);
+                bean.setSTATE("E");
+                dataSourceDAO.updateById(bean);
             }
         }
         catch (Exception e){

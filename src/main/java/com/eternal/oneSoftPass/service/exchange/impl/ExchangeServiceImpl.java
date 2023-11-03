@@ -4,13 +4,13 @@ import cn.hutool.http.HttpRequest;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
-import com.eternal.oneSoftPass.bean.RetBean;
+import com.eternal.oneSoftPass.bean.ExChangeBean;
 import com.eternal.oneSoftPass.dao.exchange.IExChangeDAO;
 import com.eternal.oneSoftPass.service.exchange.IExChangeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 @Service
@@ -48,7 +48,7 @@ public class ExchangeServiceImpl implements IExChangeService {
     }
 
     @Override
-    public ArrayList<RetBean> getRetInfo() {
-        return exChangeDAO.getRetInfo();
+    public List<ExChangeBean> getRetInfo() {
+        return exChangeDAO.selectList(null);
     }
 }

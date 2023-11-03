@@ -1,11 +1,11 @@
 package com.eternal.oneSoftPass.service.exchange;
 
-import com.eternal.oneSoftPass.bean.RetBean;
+import com.eternal.oneSoftPass.bean.ExChangeBean;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public interface IExChangeService {
     void updateExchange();
 
-    ArrayList<RetBean> getRetInfo();
+    List<ExChangeBean> getRetInfo();
 }

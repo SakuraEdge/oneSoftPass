@@ -1,5 +1,6 @@
 package com.eternal.oneSoftPass.dao.user;
 
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.eternal.oneSoftPass.bean.SignInfoBean;
 import com.eternal.oneSoftPass.bean.UserBean;
 import org.apache.ibatis.annotations.Mapper;
@@ -12,7 +13,7 @@ import java.util.List;
 
 @Mapper
 @Repository
-public interface IUserDAO {
+public interface IUserDAO extends BaseMapper<UserBean> {
 
     @Select("select U_ID from osp_user where TEL = #{tel} and STATE = 'U'")
     String selectUIDByTEL(@Param("tel") String tel);

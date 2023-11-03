@@ -1,6 +1,6 @@
 package com.eternal.oneSoftPass.controller.exchange;
 
-import com.eternal.oneSoftPass.bean.RetBean;
+import com.eternal.oneSoftPass.bean.ExChangeBean;
 import com.eternal.oneSoftPass.service.exchange.IExChangeService;
 import com.eternal.oneSoftPass.utils.CommonResp;
 import com.eternal.oneSoftPass.utils.DataIsNull;
@@ -22,8 +22,8 @@ public class ExChangeController {
     }
 
     @PostMapping("/getRetInfo")
-    public CommonResp<List<RetBean>> getRetInfo(){
-        DataIsNull<RetBean> isNull = new DataIsNull<>();
+    public CommonResp<List<ExChangeBean>> getRetInfo(){
+        DataIsNull<ExChangeBean> isNull = new DataIsNull<>();
         return isNull.listIsNull(exChangeService.getRetInfo());
     }
 

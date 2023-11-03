@@ -1,6 +1,6 @@
 package com.eternal.oneSoftPass.service.user.impl;
 
-import com.eternal.oneSoftPass.dao.user.IRegisterDAO;
+import com.eternal.oneSoftPass.bean.UserBean;
 import com.eternal.oneSoftPass.dao.user.IUserDAO;
 import com.eternal.oneSoftPass.service.user.IRegisterService;
 import com.eternal.oneSoftPass.utils.CommonResp;
@@ -18,8 +18,6 @@ public class RegisterServiceImpl implements IRegisterService {
     @Autowired
     IUserDAO userDAO;
 
-    @Autowired
-    IRegisterDAO registerDAO;
 
     @Override
     public CommonResp<String> register(Map<String, String> map) {
@@ -45,7 +43,13 @@ public class RegisterServiceImpl implements IRegisterService {
             resp.setCode(302);
         }
         else {
-            registerDAO.registerUser(name,tel,pwd,email,time);
+            UserBean bean = new UserBean();
+            bean.setNAME(name);
+            bean.setTEL(tel);
+            bean.setPASSWORD(pwd);
+            bean.setEMAIL(email);
+            bean.setCREATE_TIME(time);
+            userDAO.insert(bean);
             resp.setCode(200);
             resp.setMsg("注册成功");
         }

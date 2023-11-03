@@ -1,5 +1,7 @@
 package com.eternal.oneSoftPass.service.website.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.eternal.oneSoftPass.bean.DataSourceBean;
 import com.eternal.oneSoftPass.bean.WebSiteBean;
 import com.eternal.oneSoftPass.dao.website.IWebSiteDAO;
 import com.eternal.oneSoftPass.service.website.IWebSiteService;
@@ -16,6 +18,8 @@ public class WebSiteServiceImpl implements IWebSiteService {
 
     @Override
     public List<WebSiteBean> getWebSite() {
-        return webSiteDAO.getWebSite();
+        QueryWrapper<WebSiteBean> wrapper = new QueryWrapper<>();
+        wrapper.eq("IS_OPEN","1");
+        return webSiteDAO.selectList(wrapper);
     }
 }
