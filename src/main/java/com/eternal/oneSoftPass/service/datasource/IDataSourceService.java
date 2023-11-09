@@ -16,4 +16,6 @@ public interface IDataSourceService {
     List<DataSourceBean> getSource(String id);
 
     String delSource(List<String> param);
+
+    String updateSourceSave(Map<String, String> param);
 }

@@ -34,6 +34,12 @@ public class DataSourceController {
         return getStringCommonResp(isSave);
     }
 
+    @PostMapping("/updateSourceSave")
+    public CommonResp<String> updateSourceSave(@RequestBody Map<String,String> param) {
+        String isSave = dataSourceService.updateSourceSave(param);
+        return getStringCommonResp(isSave);
+    }
+
 
     @PostMapping("/getSource")
     public CommonResp<List<DataSourceBean>> getSource(@RequestBody Map<String,String> param) {

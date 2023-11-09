@@ -41,15 +41,8 @@ public class DataSourceServiceImpl implements IDataSourceService {
     @Override
     public String sourceSave(Map<String,String> param) {
         DataSourceBean bean = new DataSourceBean();
-        bean.setNAME(param.get("name"));
         bean.setU_ID(param.get("uid"));
-        bean.setDATA_TYPE(param.get("type"));
-        bean.setDATA_IP(param.get("ip"));
-        bean.setDATA_PORT(param.get("port"));
-        bean.setDATA_TABLE(param.get("table"));
-        bean.setDATA_USERNAME(param.get("userName"));
-        bean.setDATA_PASSWORD(param.get("userPwd"));
-        bean.setNOTE(param.get("note"));
+        getParam(param, bean);
 
         Date date = new Date();
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -88,6 +81,39 @@ public class DataSourceServiceImpl implements IDataSourceService {
             return e.getMessage();
         }
         return "true";
+    }
+
+    @Override
+    public String updateSourceSave(Map<String, String> param) {
+        String id = param.get("id");
+        DataSourceBean bean = dataSourceDAO.selectById(id);
+        getParam(param, bean);
+
+        Date date = new Date();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        String time = dateFormat.format(date);
+
+        bean.setUPDATE_TIME(time);
+
+        try {
+            dataSourceDAO.updateById(bean);
+        }
+        catch (Exception e){
+            System.out.println(e.getMessage());
+            return e.getMessage();
+        }
+        return "true";
+    }
+
+    private void getParam(Map<String, String> param, DataSourceBean bean) {
+        bean.setNAME(param.get("name"));
+        bean.setDATA_TYPE(param.get("type"));
+        bean.setDATA_IP(param.get("ip"));
+        bean.setDATA_PORT(param.get("port"));
+        bean.setDATA_TABLE(param.get("table"));
+        bean.setDATA_USERNAME(param.get("userName"));
+        bean.setDATA_PASSWORD(param.get("userPwd"));
+        bean.setNOTE(param.get("note"));
     }
 
 }
