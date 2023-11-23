@@ -21,7 +21,7 @@ public interface IUserDAO extends BaseMapper<UserBean> {
     @Select("select U_ID from osp_user where EMAIL = #{email} and STATE = 'U'")
     String selectUIDByEmail(@Param("email") String email);
 
-    @Select("select NAME,TEL,EMAIL,DESCRIPTION,CREATE_TIME,LOGIN_TIME,EXP from osp_user where U_ID = #{id} and STATE = 'U'")
+    @Select("select NAME,TEL,EMAIL,DESCRIPTION,CREATE_TIME,LOGIN_TIME,EXP,LEVEL from osp_user where U_ID = #{id} and STATE = 'U'")
     UserBean selectUserByID(@Param("id") String id);
 
     @Update("update osp_user set DESCRIPTION = #{description} where U_ID = #{id} and STATE = 'U'")

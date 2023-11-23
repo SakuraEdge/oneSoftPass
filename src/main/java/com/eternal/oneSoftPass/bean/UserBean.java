@@ -19,5 +19,5 @@ public class UserBean {
     private String exp;
     private String CREATE_TIME;
     private String STATE;
-
+    private String LEVEL;
 }
