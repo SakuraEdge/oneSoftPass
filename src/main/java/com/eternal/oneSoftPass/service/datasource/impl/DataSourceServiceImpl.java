@@ -63,6 +63,7 @@ public class DataSourceServiceImpl implements IDataSourceService {
     @Override
     public List<DataSourceBean> getSource(String id) {
         QueryWrapper<DataSourceBean> wrapper = new QueryWrapper<>();
+        wrapper.eq("U_ID",id);
         wrapper.eq("STATE",'U');
         return dataSourceDAO.selectList(wrapper);
     }

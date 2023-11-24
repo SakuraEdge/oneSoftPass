@@ -16,4 +16,6 @@ public interface IUserService {
     CommonResp<String> updatePwd(Map<String, String> param);
 
     List<SignInfoBean> getSignInfo();
+
+    List<UserBean> getUserList(Map<String,String> param);
 }

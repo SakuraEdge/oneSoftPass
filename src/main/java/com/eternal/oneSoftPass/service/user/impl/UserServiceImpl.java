@@ -1,5 +1,7 @@
 package com.eternal.oneSoftPass.service.user.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.eternal.oneSoftPass.bean.DataSourceBean;
 import com.eternal.oneSoftPass.bean.SignInfoBean;
 import com.eternal.oneSoftPass.bean.UserBean;
 import com.eternal.oneSoftPass.dao.user.ILoginDAO;
@@ -12,6 +14,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 @Service
 public class UserServiceImpl implements IUserService {
@@ -60,5 +63,15 @@ public class UserServiceImpl implements IUserService {
     @Override
     public List<SignInfoBean> getSignInfo() {
         return userDAO.getSignInfo();
+    }
+
+    @Override
+    public List<UserBean> getUserList(Map<String, String> param) {
+        QueryWrapper<UserBean> wrapper = new QueryWrapper<>();
+        String name = param.get("name");
+        if (name != null){
+            wrapper.like("NAME",name);
+        }
+        return userDAO.selectList(wrapper);
     }
 }
