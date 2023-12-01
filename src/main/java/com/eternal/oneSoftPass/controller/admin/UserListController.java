@@ -24,4 +24,10 @@ public class UserListController {
         return isNull.listIsNull(userService.getUserList(param));
     }
 
+    @PostMapping("/getUserNum")
+    public CommonResp<Map<String,String>> getUserNum(){
+        DataIsNull<Map<String,String>> isNull = new DataIsNull<>();
+        return isNull.mapIsNull(userService.getUserNum());
+    }
+
 }

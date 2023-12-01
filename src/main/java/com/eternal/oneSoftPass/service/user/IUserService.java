@@ -18,4 +18,6 @@ public interface IUserService {
     List<SignInfoBean> getSignInfo();
 
     List<UserBean> getUserList(Map<String,String> param);
+
+    Map<String,String> getUserNum();
 }

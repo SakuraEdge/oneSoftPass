@@ -1,7 +1,6 @@
 package com.eternal.oneSoftPass.service.user.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.eternal.oneSoftPass.bean.DataSourceBean;
 import com.eternal.oneSoftPass.bean.SignInfoBean;
 import com.eternal.oneSoftPass.bean.UserBean;
 import com.eternal.oneSoftPass.dao.user.ILoginDAO;
@@ -12,9 +11,9 @@ import com.eternal.oneSoftPass.utils.MD5Utils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 
 @Service
 public class UserServiceImpl implements IUserService {
@@ -74,4 +73,51 @@ public class UserServiceImpl implements IUserService {
         }
         return userDAO.selectList(wrapper);
     }
+
+    @Override
+    public Map<String,String> getUserNum() {
+        Map<String,String> map = new HashMap<>();
+        QueryWrapper<UserBean> wrapper = new QueryWrapper<>();
+        Long allNum = userDAO.selectCount(wrapper);
+        map.put("allNum",allNum.toString());
+        // state = U
+        wrapper.eq("STATE","U");
+        Long num = userDAO.selectCount(wrapper);
+        map.put("existNum",num.toString());
+        wrapper.clear();
+        // state != U
+        wrapper.ne("STATE","U");
+        num = userDAO.selectCount(wrapper);
+        map.put("closeNum",num.toString());
+        wrapper.clear();
+        // normal
+        wrapper.eq("LEVEL","1");
+        num = userDAO.selectCount(wrapper);
+        map.put("normalNum",num.toString());
+        wrapper.clear();
+        // VIP
+        wrapper.eq("LEVEL","2");
+        num = userDAO.selectCount(wrapper);
+        map.put("VIPNum",num.toString());
+        wrapper.clear();
+        // SVIP
+        wrapper.eq("LEVEL","3");
+        num = userDAO.selectCount(wrapper);
+        map.put("sVIPNum",num.toString());
+        wrapper.clear();
+        // TVIP
+        wrapper.eq("LEVEL","4");
+        num = userDAO.selectCount(wrapper);
+        map.put("tVIPNum",num.toString());
+        wrapper.clear();
+        // admin
+        wrapper.gt("LEVEL","4");
+        num = userDAO.selectCount(wrapper);
+        map.put("adminNum",num.toString());
+        wrapper.clear();
+
+
+        return map;
+    }
+
 }

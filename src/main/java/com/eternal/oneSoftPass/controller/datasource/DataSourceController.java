@@ -57,6 +57,16 @@ public class DataSourceController {
         return getStringCommonResp(isDel);
     }
 
+    @PostMapping("/getTables")
+    public CommonResp<List<String>> getTables(@RequestBody Map<String,String> param) throws SQLException {
+        DataIsNull<String> isNull = new DataIsNull<>();
+        String url = param.get("url");
+        String userName = param.get("userName");
+        String userPwd = param.get("userPwd");
+        String table = param.get("table");
+        return isNull.listIsNull(dataSourceService.getTables(url,userName,userPwd,table));
+    }
+
     private CommonResp<String> getStringCommonResp(String isSave) {
         CommonResp<String> comm = new CommonResp<>();
         if ("true".equals(isSave)) {

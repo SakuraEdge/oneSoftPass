@@ -9,12 +9,10 @@ import org.springframework.stereotype.Service;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
-import java.util.Properties;
+import java.util.*;
 
 @Service
 public class DataSourceServiceImpl implements IDataSourceService {
@@ -36,6 +34,20 @@ public class DataSourceServiceImpl implements IDataSourceService {
             return e.getMessage();
         }
         return "true";
+    }
+
+    @Override
+    public List<String> getTables(String url, String userName, String userPwd, String table) throws SQLException {
+        List<String> list  = new ArrayList<>();
+        Properties info = new Properties();
+        info.setProperty("user",userName);
+        info.setProperty("password",userPwd);
+        Connection conn = DriverManager.getConnection(url, info);
+        ResultSet tables = conn.getMetaData().getTables(table,null,null,new String[]{"TABLE"});
+        while (tables.next()) {
+            list.add(tables.getString("TABLE_NAME"));
+        }
+        return list;
     }
 
     @Override

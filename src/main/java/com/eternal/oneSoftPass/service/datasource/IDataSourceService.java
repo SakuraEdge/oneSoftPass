@@ -11,6 +11,8 @@ public interface IDataSourceService {
 
     String testConn(String url,String userName,String userPwd);
 
+    List<String> getTables(String url, String userName, String userPwd, String table) throws SQLException;
+
     String sourceSave(Map<String,String> param);
 
     List<DataSourceBean> getSource(String id);
