@@ -11,7 +11,7 @@ public interface IDataSourceService {
 
     String testConn(String url,String userName,String userPwd);
 
-    List<String> getTables(String url, String userName, String userPwd, String table) throws SQLException;
+    List<Map<String, Object>> getTables(String url, String userName, String userPwd, String table) throws SQLException;
 
     String sourceSave(Map<String,String> param);
 

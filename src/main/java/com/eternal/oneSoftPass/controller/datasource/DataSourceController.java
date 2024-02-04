@@ -58,8 +58,8 @@ public class DataSourceController {
     }
 
     @PostMapping("/getTables")
-    public CommonResp<List<String>> getTables(@RequestBody Map<String,String> param) throws SQLException {
-        DataIsNull<String> isNull = new DataIsNull<>();
+    public CommonResp<List<Map<String,Object>>> getTables(@RequestBody Map<String,String> param) throws SQLException {
+        DataIsNull<Map<String,Object>> isNull = new DataIsNull<>();
         String url = param.get("url");
         String userName = param.get("userName");
         String userPwd = param.get("userPwd");

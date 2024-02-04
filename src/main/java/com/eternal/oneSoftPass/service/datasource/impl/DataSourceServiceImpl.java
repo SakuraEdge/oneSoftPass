@@ -37,15 +37,31 @@ public class DataSourceServiceImpl implements IDataSourceService {
     }
 
     @Override
-    public List<String> getTables(String url, String userName, String userPwd, String table) throws SQLException {
-        List<String> list  = new ArrayList<>();
+    public List<Map<String,Object>> getTables(String url, String userName, String userPwd, String table) throws SQLException {
+        List<Map<String,Object>> list = new ArrayList<>();
         Properties info = new Properties();
         info.setProperty("user",userName);
         info.setProperty("password",userPwd);
         Connection conn = DriverManager.getConnection(url, info);
         ResultSet tables = conn.getMetaData().getTables(table,null,null,new String[]{"TABLE"});
         while (tables.next()) {
-            list.add(tables.getString("TABLE_NAME"));
+            String tableName = tables.getString("TABLE_NAME");
+            ResultSet columns = conn.getMetaData().getColumns(null,null,tableName,"%");
+            List<Map<String,String>> columnList = new ArrayList<>();
+            while (columns.next()){
+                String columnName = columns.getString("COLUMN_NAME");
+                String typeName = columns.getString("TYPE_NAME");
+                String remarks = columns.getString("REMARKS");
+                Map<String,String> columnMap = new HashMap<>();
+                columnMap.put("columnName",columnName);
+                columnMap.put("typeName",typeName);
+                columnMap.put("remarks",remarks);
+                columnList.add(columnMap);
+            }
+            Map<String,Object> map = new HashMap<>();
+            map.put("tableName",tableName);
+            map.put("column",columnList);
+            list.add(map);
         }
         return list;
     }
