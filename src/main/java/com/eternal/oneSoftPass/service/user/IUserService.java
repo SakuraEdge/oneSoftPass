@@ -20,4 +20,8 @@ public interface IUserService {
     List<UserBean> getUserList(Map<String,String> param);
 
     Map<String,String> getUserNum();
+
+    String getUserNameById(String id);
+
+    void updatePerm(Map<String, String> param);
 }

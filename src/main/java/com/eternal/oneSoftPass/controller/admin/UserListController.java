@@ -30,4 +30,9 @@ public class UserListController {
         return isNull.mapIsNull(userService.getUserNum());
     }
 
+    @PostMapping("/updatePerm")
+    public void updatePerm(@RequestBody Map<String,String> param){
+        userService.updatePerm(param);
+    }
+
 }

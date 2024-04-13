@@ -120,4 +120,19 @@ public class UserServiceImpl implements IUserService {
         return map;
     }
 
+    @Override
+    public String getUserNameById(String id) {
+        return userDAO.selectUserByID(id).getNAME();
+    }
+
+    @Override
+    public void updatePerm(Map<String, String> param) {
+        String id = param.get("id");
+        String perm = param.get("perm");
+        UserBean user = userDAO.selectUserByID(id);
+        user.setU_ID(id);
+        user.setLEVEL(perm);
+        userDAO.updateById(user);
+    }
+
 }
