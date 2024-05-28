@@ -18,3 +18,11 @@
 > 报错日志简单分析报错原因
 
 该工程为后端项目，前端地址：https://github.com/SakuraEdge/oneSoftPassVue
+
+部署流程：
+
+1.数据库使用Mysql，创建名为osp的Schema。 在osp数据库下运行sql/struct.sql文件创建数据表
+
+2.pom.xml更新依赖，前端项目执行npm install
+
+3.运行OneSoftPassApplication即可

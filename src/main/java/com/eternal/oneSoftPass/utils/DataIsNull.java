@@ -16,7 +16,7 @@ public class DataIsNull<T> {
     public CommonResp<List<T>> listIsNull(List<T> list) {
         CommonResp<List<T>> commonResp = new CommonResp<>();
         commonResp.setResult(list);
-        if (list == null || list.size() == 0){
+        if (list == null || list.isEmpty()){
             commonResp.setCode(300);
             commonResp.setResult(null);
             commonResp.setMsg("没有数据");

@@ -2,7 +2,7 @@ spring:
   application:
     name: oneSoftPass
   datasource:
-    url: jdbc:mysql://localhost:3306/osp?useUnicode=true&characterEncoding=utf-8&serverTimezone=UTC&useSSL=false
+    url: jdbc:mysql://localhost:3306/osp?allowPublicKeyRetrieval=true&useUnicode=true&characterEncoding=utf-8&serverTimezone=UTC&useSSL=false
     username: root
     password: 123456
     driver-class-name: com.mysql.cj.jdbc.Driver

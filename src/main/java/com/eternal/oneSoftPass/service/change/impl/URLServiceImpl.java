@@ -1,7 +1,7 @@
 package com.eternal.oneSoftPass.service.change.impl;
 
 import com.eternal.oneSoftPass.service.change.IURLService;
-import com.sun.deploy.net.URLEncoder;
+import java.net.URLEncoder;
 import org.springframework.stereotype.Service;
 
 import java.io.UnsupportedEncodingException;
